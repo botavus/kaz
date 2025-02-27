@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статья</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; background: #f9f9f9; padding: 20px; }
+        h1 { text-align: center; }
+        #article { background: white; padding: 15px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body>
+    <h1 id="article-title">Загрузка...</h1>
+    <div id="article"></div>
+
+    <script>
+        const fileName = location.pathname.split("/").pop();
+        const articleData = localStorage.getItem(`articles/${fileName}`);
+
+        if (articleData) {
+            const article = JSON.parse(articleData);
+            document.getElementById("article-title").innerText = article.title;
+            document.getElementById("article").innerHTML = article.content;
+        } else {
+            document.getElementById("article").innerText = "Статья не найдена.";
+        }
+    </script>
+</body>
+</html>
+
